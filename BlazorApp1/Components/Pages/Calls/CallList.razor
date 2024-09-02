@@ -1,0 +1,51 @@
+@page "/calls"
+
+@inject CallService CallService
+
+<h3>All Calls</h3>
+
+@if (calls == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!calls.Any())
+{
+    <p>No calls found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Call ID</th>
+            <th>Phone ID</th>
+            <th>City ID</th>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Tariff ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var call in calls)
+        {
+            <tr>
+                <td>@call.CallId</td>
+                <td>@call.PhoneId</td>
+                <td>@call.CityId</td>
+                <td>@call.Date</td>
+                <td>@call.Duration</td>
+                <td>@call.TariffId</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<Call>? calls;
+
+    protected override async Task OnInitializedAsync()
+    {
+        calls = await CallService.GetAllCallsAsync();
+    }
+}

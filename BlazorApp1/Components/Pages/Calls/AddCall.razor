@@ -1,0 +1,44 @@
+@page "/calls/add"
+
+<h3>Create Call</h3>
+
+<EditForm Model="call" OnValidSubmit="HandleValidSubmit" FormName="Add-Call">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="PhoneId">Phone ID:</label>
+        <InputNumber id="PhoneId" @bind-Value="call.PhoneId" class="form-control" />
+    </div>
+
+    <div>
+        <label for="CityId">City ID:</label>
+        <InputNumber id="CityId" @bind-Value="call.CityId" class="form-control" />
+    </div>
+
+    <div>
+        <label for="Date">Date:</label>
+        <InputDate id="Date" @bind-Value="call.Date" class="form-control" />
+    </div>
+
+    <div>
+        <label for="Duration">Duration (minutes):</label>
+        <InputNumber id="Duration" @bind-Value="call.Duration" class="form-control" />
+    </div>
+
+    <div>
+        <label for="TariffId">Tariff ID:</label>
+        <InputNumber id="TariffId" @bind-Value="call.TariffId" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code {
+    public Call call = new();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine(call.ToString());
+    }
+}
